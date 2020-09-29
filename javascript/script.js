@@ -1,4 +1,5 @@
 let mysql = require('mysql');
+
 let cnx = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -6,27 +7,33 @@ let cnx = mysql.createConnection({
     database: "test"
 });
 
-cnx.connect(function(err) {
-    if (err) {
-        throw err;
-    }
+//function requete(sql) {
+    cnx.connect(function(err) {
+        try {
+            cnx.query('SELECT * FROM advertissements', function (err, result) {
+                try {
+                    console.log('=======================');
+                    console.log(result); // doit être la liste
 
-    cnx.query('SELECT * FROM advertissements;', function (err, result) {
-        if (err) {
-            throw err;
+                    console.log('=======================');
+                    for (res of result) {
+                        console.log(res.Titre);
+                    }
+                }
+                catch (err) {}
+
+                cnx.end(function(err) {
+                    try {
+
+                    }
+                    catch (err) {}
+                });
+            });
         }
-
-        console.log('=======================');
-        console.log(result); // doit être la liste
-
-        console.log('=======================');
-        for (res of result) {
-            console.log(res.Titre);
-        }
-        cnx.end(function(err) {
-            if (err) {
-                throw err;
-            }
-        });
+        catch (err) {}
     });
-});
+//}
+
+/*$('#del').on('click', function() {
+   this.requete('DELETE FROM advertissements');
+});*/
