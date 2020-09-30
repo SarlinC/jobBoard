@@ -129,10 +129,3 @@ class Request {
         });
     }
 }
-
-(function () {
-    let req = new Request();
-
-    req.selectAll('people');
-    req.selectAll('advertisements');
-})()
