@@ -39,7 +39,7 @@
                 throw err;
             }
 
-            cnx.query(`SELECT * FROM ${table} WHERE ${id}=${id}`, function (err, result) {
+            cnx.query(`SELECT * FROM ${table} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, function (err, result) {
                 if (err) {
                     throw err;
                 }
@@ -57,13 +57,13 @@
         });
     }
 
-    function del(id) {
+    function del(table, id) {
         cnx.connect(function(err) {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`SELECT ${id} FROM ${table} WHERE ${id}=${id}`, function (err, result) {
+            cnx.query(`DELETE FROM ${table} WHERE ${id}=${id}`, function (err, result) {
                 if (err) {
                     throw err;
                 }
@@ -71,9 +71,6 @@
                 console.log(result); // doit être la liste
 
                 console.log('=======================');
-                for (res of result) {
-                    console.log(res.Titre);
-                }
 
                 cnx.end(function(err) {
                     if (err) {
