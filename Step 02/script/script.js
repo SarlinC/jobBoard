@@ -21,7 +21,6 @@
                 }
                 console.log('=======================');
                 console.log(result); // doit être la liste
-
                 console.log('=======================');
 
                 cnx.end(function(err) {
@@ -45,7 +44,6 @@
                 }
                 console.log('=======================');
                 console.log(result); // doit être la liste
-
                 console.log('=======================');
 
                 cnx.end(function(err) {
@@ -63,13 +61,12 @@
                 throw err;
             }
 
-            cnx.query(`DELETE FROM ${table} WHERE ${id}=${id}`, function (err, result) {
+            cnx.query(`DELETE FROM ${table} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, function (err, result) {
                 if (err) {
                     throw err;
                 }
                 console.log('=======================');
                 console.log(result); // doit être la liste
-
                 console.log('=======================');
 
                 cnx.end(function(err) {
@@ -81,23 +78,19 @@
         });
     }
 
-    function update() {
+    function update(table, id, values) {
         cnx.connect(function(err) {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`SELECT ${id} FROM ${table} WHERE ${id}=${id}`, function (err, result) {
+            cnx.query(`UPDATE ${table} SET ${values} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, function (err, result) {
                 if (err) {
                     throw err;
                 }
                 console.log('=======================');
                 console.log(result); // doit être la liste
-
                 console.log('=======================');
-                for (res of result) {
-                    console.log(res.Titre);
-                }
 
                 cnx.end(function(err) {
                     if (err) {
@@ -108,13 +101,13 @@
         });
     }
 
-    function create() {
+    function create(table, values) {
         cnx.connect(function(err) {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`SELECT ${id} FROM ${table} WHERE ${id}=${id}`, function (err, result) {
+            cnx.query(`INSERT INTO ${table} VALUES ${values}`, function (err, result) {
                 if (err) {
                     throw err;
                 }
