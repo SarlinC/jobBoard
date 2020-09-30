@@ -1,20 +1,22 @@
-(function() {
-    const mysql = require('mysql');
+class Request {
+    constructor() {
+        let mysql = require('mysql');
 
-    const cnx = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "jobboard"
-    });
+        this.cnx = mysql.createConnection({
+            host: "localhost",
+            user: "root",
+            password: "",
+            database: "jobboard"
+        });
+    }
 
-    function selectAll(table) {
-        cnx.connect(function(err) {
+    selectAll(table) {
+        this.cnx.connect(err => {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`SELECT * FROM ${table}`, function (err, result) {
+            this.cnx.query(`SELECT * FROM ${table}`, (err, result) => {
                 if (err) {
                     throw err;
                 }
@@ -22,7 +24,7 @@
                 console.log(result); // doit être la liste
                 console.log('=======================');
 
-                cnx.end(function(err) {
+                this.cnx.end(function (err) {
                     if (err) {
                         throw err;
                     }
@@ -31,13 +33,13 @@
         });
     }
 
-    function selectById(table, id) {
-        cnx.connect(function(err) {
+    selectById(table, id) {
+        this.cnx.connect(err => {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`SELECT * FROM ${table} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, function (err, result) {
+            this.cnx.query(`SELECT * FROM ${table} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, (err, result) => {
                 if (err) {
                     throw err;
                 }
@@ -45,7 +47,7 @@
                 console.log(result); // doit être la liste
                 console.log('=======================');
 
-                cnx.end(function(err) {
+                this.cnx.end(err => {
                     if (err) {
                         throw err;
                     }
@@ -54,13 +56,13 @@
         });
     }
 
-    function del(table, id) {
-        cnx.connect(function(err) {
+    del(table, id) {
+        this.cnx.connect(err => {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`DELETE FROM ${table} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, function (err, result) {
+            this.cnx.query(`DELETE FROM ${table} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, (err, result) => {
                 if (err) {
                     throw err;
                 }
@@ -68,7 +70,7 @@
                 console.log(result); // doit être la liste
                 console.log('=======================');
 
-                cnx.end(function(err) {
+                this.cnx.end(err => {
                     if (err) {
                         throw err;
                     }
@@ -77,13 +79,13 @@
         });
     }
 
-    function update(table, id, values) {
-        cnx.connect(function(err) {
+    update(table, id, values) {
+        this.cnx.connect(err => {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`UPDATE ${table} SET ${values} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, function (err, result) {
+            this.cnx.query(`UPDATE ${table} SET ${values} WHERE ${'num' + table.charAt(0).toUpperCase() + table.substring(1)}=${id}`, (err, result) => {
                 if (err) {
                     throw err;
                 }
@@ -91,7 +93,7 @@
                 console.log(result); // doit être la liste
                 console.log('=======================');
 
-                cnx.end(function(err) {
+                this.cnx.end(err => {
                     if (err) {
                         throw err;
                     }
@@ -100,13 +102,13 @@
         });
     }
 
-    function create(table, values) {
-        cnx.connect(function(err) {
+    create(table, values) {
+        this.cnx.connect(err => {
             if (err) {
                 throw err;
             }
 
-            cnx.query(`INSERT INTO ${table} VALUES ${values}`, function (err, result) {
+            this.cnx.query(`INSERT INTO ${table} VALUES ${values}`, (err, result) => {
                 if (err) {
                     throw err;
                 }
@@ -118,7 +120,7 @@
                     console.log(res.Titre);
                 }
 
-                cnx.end(function(err) {
+                this.cnx.end(err => {
                     if (err) {
                         throw err;
                     }
@@ -126,4 +128,11 @@
             });
         });
     }
+}
+
+(function () {
+    let req = new Request();
+
+    req.selectAll('people');
+    req.selectAll('advertisements');
 })()
