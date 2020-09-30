@@ -16,7 +16,6 @@
 
             cnx.query(`SELECT * FROM ${table}`, function (err, result) {
                 if (err) {
-                    console.log('fail');
                     throw err;
                 }
                 console.log('=======================');
