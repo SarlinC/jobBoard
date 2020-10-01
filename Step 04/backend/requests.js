@@ -129,3 +129,7 @@ class Request {
         });
     }
 }
+
+const requests = new Request();
+
+module.exports = requests;
