@@ -1,9 +1,17 @@
 (function() {
-    fetch('../backend/something.js', {
-        someshit: ''
+    const axios = require('axios');
+
+    axios.get('http://localhost:3000/').then(response => {
+        console.log(response);
+    }).catch(err => {
+        console.log(err);
+    });
+
+    /*fetch('../backend/app.js', {
+        method: 'GET'
     }).then((response) => {
         console.log(response);
-    });
+    });*/
 });
 
         /*
