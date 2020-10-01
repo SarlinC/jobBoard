@@ -1,34 +1,9 @@
 (function() {
-    const axios = require('axios');
-
-    const postBreed = () => {
-        try {
-            return axios.post('../backend/', {
-                titre: 'titre',
-                objet: '',
-                contenu: '',
-                date: '',
-                numCompanies: '',
-                numCandidat: '',
-                numRecruteur: ''
-            });
-        }
-        catch (e) {
-            console.log(e);
-        }
-    }
-
-    const countBreeds = async () => {
-        postBreed().then(response => {
-            if (response.data.message) {
-                console.log(`Got ${Object.entries(response.data.message).length} breeds.`)
-            }
-        }).catch(e => {
-            console.log(e);
-        });
-    }
-
-    countBreeds();
+    fetch('../backend/something.js', {
+        someshit: ''
+    }).then((response) => {
+        console.log(response);
+    });
 });
 
         /*
