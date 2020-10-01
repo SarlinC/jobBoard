@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script/register.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -28,30 +29,30 @@
 </header>
 
 <main>
-    <div class="container">
+    <div class="container" id="reg_form">
         <div class="card">
             <div class="card-content">
                 <form method="post" class="container">
 
                     <div>
                         <label for="first_name_id">First name</label>
-                        <input id="first_name_id" type="text">
+                        <input id="first_name_id" type="text" required>
                     </div>
 
 
                     <div>
                         <label for="last_name_id">Last name</label>
-                        <input id="last_name_id" type="text">
+                        <input id="last_name_id" type="text" required>
                     </div>
 
                     <div>
                         <label for="email_id">Email</label>
-                        <input id="email_id" type="email">
+                        <input id="email_id" type="email" required>
                     </div>
 
                     <div>
                         <label for="pwd_id">Password</label>
-                        <input id="pwd_id" type="password">
+                        <input id="pwd_id" type="password" required>
                     </div>
 
                     <div>
@@ -73,12 +74,30 @@
                     </div>
 
                     <div class="center">
-                        <input id="submit" class="btn" type="submit" value="Submit">
+                        <button id="submit" class="btn" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="container" id="reg_success">
+        <div class="row center">
+            <div class="col s12">
+                <div class="card white">
+                <div class="card-content">
+                    <span class="card-title">Success</span>
+                    <p>You have been successfully registered !</p>
+                </div>
+                <div class="card-action center">
+                    <a href="./login.html" class="btn">Login</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="ad_box"></div>
     <div class="ad_box"></div>
