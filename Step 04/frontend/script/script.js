@@ -1,8 +1,19 @@
-//$(function() {
-    const axios = require('axios');
-
+$(function() {
     axios.get('http://localhost:3000/').then(response => {
-        console.log('response: ' + response);
+        for (let i = 0; i < response.data.length; i ++) {
+            $('.popout').append(
+                '<li>' +
+                '<div class="collapsible-header">\n' +
+                ' <h5>' + response.data[i].titre + '</h5>\n' +
+                '  <h6 class="obj">' + response.data[i].objet + '</h6>\n' +
+                '   <p class="showmore">\n' +
+                '    <a>learn more</a>\n' +
+                '   </p>\n' +
+                '  </div>\n' +
+                ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
+                '<p>' + response.data[i].date + '</p></div>\n' +
+                '</li>')
+        }
     }).catch(err => {
         console.log(err);
     });
@@ -10,23 +21,4 @@
     $(document).ready(function(){
         $('.collapsible').collapsible();
     });
-
-    /*fetch('../backend/app.js', {
-        method: 'GET'
-    }).then((response) => {
-        console.log(response);
-    });*/
-//});
-
-        /*
-            <li>
-                <div class="collapsible-header">
-                    <h5>Job name 1</h5>
-                    <h6 class="obj">My description in 2 words</h6>
-                    <p class="showmore">
-                        <a>learn more</a>
-                    </p>
-                </div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-        */
+});
