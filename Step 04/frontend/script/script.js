@@ -12,7 +12,7 @@ $(function() {
                 '  </div>\n' +
                 ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
                 '<p>' + response.data[i].date + '</p></div>\n' +
-                '</li>')
+                '</li>');
         }
     }).catch(err => {
         console.log(err);
