@@ -1,10 +1,14 @@
-(function() {
+//$(function() {
     const axios = require('axios');
 
     axios.get('http://localhost:3000/').then(response => {
-        console.log(response);
+        console.log('response: ' + response);
     }).catch(err => {
         console.log(err);
+    });
+
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
     });
 
     /*fetch('../backend/app.js', {
@@ -12,7 +16,7 @@
     }).then((response) => {
         console.log(response);
     });*/
-});
+//});
 
         /*
             <li>
