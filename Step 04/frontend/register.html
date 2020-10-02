@@ -9,6 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="script/register.js" type="text/javascript"></script>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- Inclusion d'Axios -->
+
     <link rel="stylesheet" href="css/styles.css">
 
     <title>register</title>
@@ -59,13 +61,13 @@
                         </p>
                         <p>
                             <label>
-                                <input name="group1" type="radio" checked />
+                                <input name="is_recruiter" type="radio" value ="1"checked />
                                 <span>Recruiter</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="group1" type="radio" />
+                                <input name="is_recruiter" type="radio" value="0"/>
                                 <span>Applicant</span>
                             </label>
                         </p>

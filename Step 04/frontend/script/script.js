@@ -1,5 +1,6 @@
 $(function() {
-    axios.get('http://localhost:3000/').then(response => {
+
+    axios.get('http://localhost:3000/select').then(response => {    //selectionne et affiche les ad
         for (let i = 0; i < response.data.length; i ++) {
             $('.popout').append(
                 '<li>' +
@@ -21,4 +22,6 @@ $(function() {
     $(document).ready(function(){
         $('.collapsible').collapsible();
     });
+    
+
 });
