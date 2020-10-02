@@ -14,15 +14,10 @@ router.post('/', function(req, res) {
         database: 'jobboard'
     });
 
-    connection.connect();
-
-    console.log(req);
-
-    connection.query(`INSERT INTO people (nomPeople, prenomPeople, emailPeople, password, isRecruteur)`
-    + ` VALUES ('${req.body.lastName}', '${req.body.firstName}', '${req.body.email_string}', '${req.body.pwd_string}', '${req.body.is_recruteur}')`, (err, res) => {
+    connection.query(`INSERT INTO people (nomPeople, prenomPeople, emailPeople, password, isRecruteur) VALUES ('${req.body.lastName}', '${req.body.firstName}', '${req.body.email_string}', '${req.body.pwd_string}', '${req.body.is_recruteur}')`, (err, res) => {
         if(err) {
             throw err;
-        } 
+        }
     });
     
 });
