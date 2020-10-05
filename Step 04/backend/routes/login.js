@@ -1,28 +1,38 @@
 var express = require('express');
+const bcrypt = require('bcrypt');
+
 var router = express.Router();
 
 /* POST connecting user. */
 
 
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
 
     let mysql = require('mysql');
     let connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'root',
         database: 'jobboard'
     });
 
-    console.log('req : ' + req);
+    connection.connect();
 
-    connection.query(`SELECT * FROM people WHERE emailPeople='${req.body.email}'`, (err, res) => {
-        if(err) {
-            console.log('err : ' + err);
+    connection.query(`SELECT * FROM people WHERE emailPeople='${req.body.email}'`, (err, result) => {
+        if (err) {
+            res.send('Erreur !');
         }
-        console.log('res : ' + res);
+        bcrypt.compare(req.body.password, result[0].password).then(valid => {
+            if (valid) {
+                res.send(true);
+            }
+            else {
+                res.send(false);
+            }
+        }).catch(err => {
+            throw err;
+        });
     });
-
 });
 
 module.exports = router;
