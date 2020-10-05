@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- Inclusion d'Axios -->
+
     <script src="script/login.js" type="text/javascript" defer></script>
 
     <title>login</title>
@@ -43,8 +45,7 @@
                     </div>
 
                     <div class="center">
-                        <button id="connect" class="btn" type="submit">Connect</button>
-                        <!-- <input id="connect" class="btn" type="submit" value="Connect"> -->
+                        <button class="btn" type="submit">Connect</button>
                         <a href="./register.html" class="btn">Register</a>
                     </div>
                 </form>
@@ -76,9 +77,4 @@
     </div>
 </footer>
 </body>
-<script>
-    $(document).ready(function(){
-        $('.collapsible').collapsible();
-    });
-</script>
 </html>
