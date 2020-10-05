@@ -11,6 +11,7 @@ router.post('/', function(req, res) {
     let mysql = require('mysql');
     let connection = mysql.createConnection({
         host: 'localhost',
+        port: '8889',
         user: 'root',
         password: 'root',
         database: 'jobboard'
