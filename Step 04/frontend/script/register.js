@@ -1,10 +1,7 @@
-
-
 $(function() {
-
     $('#reg_success').hide();
 
-    $('#reg_form').on('submit', function() {
+    $('#reg_form').addEventListener('submit', function() {
         $('#reg_form').hide();
         $('#reg_success').show();
 
@@ -38,5 +35,4 @@ $(function() {
 
         return false;
     });
-
-});
+})();
