@@ -9,10 +9,12 @@ $(function() {
         if($('[name="is_recruiter"]')[0].checked) {
             is_recruteur = 0;
             $('#companies').hide();
+            $('#companieName_id').removeAttr('required');
         }
         else {
             is_recruteur = 1;
             $('#companies').show();
+            $('#companieName_id').attr('required', 'true');
         }
     });
 

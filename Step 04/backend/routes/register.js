@@ -16,18 +16,23 @@ router.post('/', function(req, res) {
             if(err) {
                 throw err;
             }
+
+            if(!_.isEmpty(req.body.companieName)) {
+                connection.query(`SELECT numPeople FROM people 
+                WHERE emailPeople='${req.body.email_string}' AND nomPeople='${req.body.lastName}' AND prenomPeople='${req.body.firstName}'`, (err, result) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    connection.query(`INSERT INTO companies (nomCompanies, numRecruteur) VALUES ('${req.body.companieName}', '${result[0].numPeople}')`, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                    });
+                });
+            }
         });
     });
-
-    if(!_.isEmpty(req.body.companieName)) {
-        connection.query(`SELECT numPeople FROM people WHERE emailPeople='${req.body.email_string}' AND nomPeople='${req.body.lastName}' AND prenomPeople='${req.body.firstName}'`, (err, result) => {
-            if (err) {
-                throw err;
-            }
-            console.log(result);
-            //connection.query(`INSERT INTO companies (nomCompanies, numRecruteur) VALUES ('${req.body.companieName}', '${result}')`)
-        });
-    }
 });
 
 module.exports = router;
