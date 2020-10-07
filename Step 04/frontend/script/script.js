@@ -33,27 +33,20 @@ $(function() {
                 '  </div>\n' +
                 ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
                 '<p>' + response.data[i].date + '</p></div>\n' +
-                '<button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button>' +
+                '<button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
                 '</li>');
         }
         $('.admin_btns').on('click', (e) => {
             console.log((e.target).value);
-            // let numAdvertisements = e.val();
+            let numAdvertisements = (e.target).value;
 
             axios.post('http://localhost:3000/delete', { numAdvertisements: numAdvertisements })
             .then(response => { 
-                window.location.href = "./index.html";
             });
         });
     }).catch(err => {
         console.log(err);
     });
-
-
-
-    
-
-
 
 
     $(document).ready(function(){
