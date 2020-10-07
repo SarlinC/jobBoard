@@ -18,13 +18,7 @@ router.post('/', function (req, res) {
         else {                              //sinon lance la comparaison
             bcrypt.compare(req.body.password, result[0].password).then(valid => {
                 
-                res.send(valid);
-                // if (valid) {
-                //     res.send(true);
-                // }
-                // else {
-                //     res.send(false);
-                // }
+                res.send([valid, result]);
                 
             }).catch(err => {
                 throw err;
