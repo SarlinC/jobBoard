@@ -7,12 +7,11 @@ var router = express.Router();
 /* GET users listing. */
 
 
-router.get('/', function(req, res) {
-  connection.query('SELECT * FROM advertisements', (err, result) => {
+router.post('/', function(req, res) {
+  connection.query(`DELETE FROM advertisements WHERE numAdvertisements = ${req.body.numAdvertisements}`, (err, result) => {
     if (err) {
       throw err;
     }
-    res.send(result);
   });
 });
 

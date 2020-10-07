@@ -1,5 +1,7 @@
 $(function() {
 
+    $.getScript('src/utils.js');
+
     $('#login_container').show();
     $('#login_fail').hide();
     $('#login_success').hide();
@@ -13,16 +15,20 @@ $(function() {
             email: email,
             password: password
         }).then( response => {
-            console.log(response.data[1][0].isRecruteur);
+            console.log(response.data);
             if(response.data[0] === false) {
                 $('#login_container').hide();
                 $('#login_fail').show();
             }
             else {
                 $('#login_container').hide();
-                $('#login_success').show();
+                // $('#login_success').show();
+                window.location.href = "./index.html";
 
                 document.cookie = `isRecruteur=${response.data[1][0].isRecruteur}`;
+
+                let ck = new Cookie();
+                console.log(parseInt(ck.getCookie('isRecruteur')));
             }
         }).catch( err => {
             console.log(err);
