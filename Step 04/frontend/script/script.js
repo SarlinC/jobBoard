@@ -4,16 +4,6 @@ $(function() {
 
     $('#disconnect').hide();
     $('#create_ad').hide();
-    
-    if (document.cookie != "") {
-        
-        $('#connect').hide();
-        $('#disconnect').show();
-
-        if (parseInt(ck.getCookie('isRecruteur'))) {
-            $('#create_ad').show();
-        }
-    }
 
     $('#disconnect').on('click', () => {
         document.cookie = 'isRecruteur=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
@@ -36,6 +26,20 @@ $(function() {
                 '<button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
                 '</li>');
         }
+
+        $('.admin_btns').hide();
+
+        if (document.cookie != "") {
+
+            $('#connect').hide();
+            $('#disconnect').show();
+            $('.admin_btns').show();
+
+            if (parseInt(ck.getCookie('isRecruteur'))) {
+                $('#create_ad').show();
+            }
+        }
+
         $('.admin_btns').on('click', (e) => {
             console.log((e.target).value);
             let numAdvertisements = (e.target).value;
@@ -47,7 +51,6 @@ $(function() {
     }).catch(err => {
         console.log(err);
     });
-
 
     $(document).ready(function(){
         $('.collapsible').collapsible();
