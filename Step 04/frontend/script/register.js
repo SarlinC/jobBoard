@@ -40,14 +40,11 @@ $(function() {
             pwd_string: pwd_string,
             is_recruteur: is_recruteur,
             companieName: companieName
-        })
-        .then( response => {
+        }).then( response => {
             console.log(response.data);
-        })
-        .catch( err => {
+        }).catch( err => {
             console.log(err);
         });
-
         return false;
     });
 });
