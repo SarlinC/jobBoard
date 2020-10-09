@@ -8,7 +8,7 @@ var selectRouter = require('./routes/select');
 var deleteRouter = require('./routes/delete');
 var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
-var newPostRouter = require('./routes/newPost');
+var createPostRouter = require('./routes/createPost');
 var updateRouter = require('./routes/update');
 
 var app = express();
@@ -35,7 +35,7 @@ app.use('/select', selectRouter);
 app.use('/delete', deleteRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-app.use('/newPost', newPostRouter);
+app.use('/createPost', createPostRouter);
 app.use('/update', updateRouter);
 
 // catch 404 and forward to error handler
