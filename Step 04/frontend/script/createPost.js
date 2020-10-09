@@ -2,6 +2,8 @@ $(function () {
 
     let ck = new Cookie();
 
+    $('#ad_success').hide();
+
     $('#ad_form').on('submit', function() {
 
         let ad_title = $('#ad_title').val();
@@ -20,9 +22,13 @@ $(function () {
             ad_date: ad_date
         }).then(response => {
             console.log(response.data);
+            $('#ad_success').show();
+            $('#ad_form').hide();
+            
         }).catch(err => {
             console.log(err);
         });
+        
         return false;
     });
 });

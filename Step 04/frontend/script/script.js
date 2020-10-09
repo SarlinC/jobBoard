@@ -7,6 +7,7 @@ $(function() {
 
     $('#disconnect').on('click', () => {
         document.cookie = 'isRecruteur=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'numPeople=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
     });
 
     axios.get('http://localhost:3000/select').then(response => {    //selectionne et affiche les ad
