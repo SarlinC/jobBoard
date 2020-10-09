@@ -26,14 +26,12 @@ $(function() {
                 window.location.href = "./index.html";
 
                 document.cookie = `isRecruteur=${response.data[1][0].isRecruteur}`;
+                document.cookie = `numPeople=${response.data[1][0].numPeople}`;
 
-                let ck = new Cookie();
-                console.log(parseInt(ck.getCookie('isRecruteur')));
             }
         }).catch( err => {
             console.log(err);
         });
-
         return false;
     });
 
