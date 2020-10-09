@@ -1,5 +1,3 @@
-const { default: Axios } = require("axios");
-
 $(function () {
 
     $('#ad_form').on('submit', function() {
