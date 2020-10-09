@@ -24,7 +24,10 @@ $(function() {
                 '  </div>\n' +
                 ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
                 '<p>' + response.data[i].date + '</p></div>\n' +
-                '<button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn delete admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
+                '<button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button>' + 
+                '<a href="./index.html"><button class="btn delete admin_btns" value='+ 
+                response.data[i].numAdvertisements +'>Delete</button></a>' +
+                '<a class="modal-trigger" href="#modal1"><button class="btn" value='+ response.data[i].numAdvertisements +'>Apply</button><a>' +
                 '</li>');
         }
 
@@ -51,12 +54,12 @@ $(function() {
         });
 
         $('.update').on('click', (e) => {
-           let numAd = e.target.value;
+            let numAd = e.target.value;
 
-           axios.post('http://localhost:3000/update', {
-              numAdvertisements: numAd
-           }).then(response => {
-           console.log(response);
+            axios.post('http://localhost:3000/update', {
+                numAdvertisements: numAd
+            }).then(response => {
+            console.log(response);
                 $('.container')[0].innerHTML =
                 '<div class="card">' +
                     '<div class="card-content">' +
@@ -66,19 +69,19 @@ $(function() {
                                 '<input id="ad_title" type="text" value="' + response.data[0].titre + '" required>' +
                             '</div>' +
 
-                             '<div>' +
+                            '<div>' +
                                 '<label for="ad_object">Object</label>' +
                                 '<input id="ad_object" type="text" value="' + response.data[0].objet + '" required>' +
-                             '</div>' +
+                            '</div>' +
 
-                             '<div>' +
+                            '<div>' +
                                 '<label>Contenu</label>' +
                                 '<textarea id="ad_contenu" required>' + response.data[0].contenu + '</textarea>' +
-                             '</div>' +
+                            '</div>' +
 
-                             '<div class="center">' +
+                            '<div class="center">' +
                                 '<button id="submit" class="btn" type="submit">Update</button>' +
-                             '</div>' +
+                            '</div>' +
                         '</form>' +
                     '</div>' +
                 '</div>';
@@ -91,15 +94,19 @@ $(function() {
                         contenu: $('#ad_contenu').val()
                     });
                 });
-           }).catch(err => {
-               throw err;
-           });
+            }).catch(err => {
+                throw err;
+            });
         });
     }).catch(err => {
         console.log(err);
     });
 
+
     $(document).ready(function(){
         $('.collapsible').collapsible();
+    });
+    $(document).ready(function(){
+        $('.modal').modal();
     });
 });
