@@ -23,7 +23,7 @@ $(function() {
                 '  </div>\n' +
                 ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
                 '<p>' + response.data[i].date + '</p></div>\n' +
-                '<button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn delete admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
+                '<a href="./createPost"><button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button></a><a href="./index.html"><button class="btn delete admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
                 '</li>');
         }
 
