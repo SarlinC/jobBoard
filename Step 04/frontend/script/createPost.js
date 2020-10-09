@@ -7,7 +7,7 @@ $(function () {
         let ad_contenu = $('#ad_contenu').val();
         let ad_date = Date(Date.now()).slice(0, 25);
 
-        axios.post('http://localhost:3000/newPost', {
+        axios.post('http://localhost:3000/createPost', {
             ad_title: ad_title,
             ad_object: ad_object,
             ad_contenu: ad_contenu,
