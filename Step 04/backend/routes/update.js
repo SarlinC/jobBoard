@@ -8,12 +8,12 @@ var router = express.Router();
 
 
 router.post('/', function(req, res) {
-        connection.query(`SELECT * FROM advertisements WHERE numAdvertisements=${req.body.numAdvertisements}`, (err, result) => {
-            if(err) {
-                throw err;
-            }
-            res.send(result);
-        });
+    connection.query(`SELECT * FROM advertisements WHERE numAdvertisements='${req.body.numAdvertisements}'`, (err, result) => {
+        if(err) {
+            throw err;
+        }
+        res.send(result);
+    });
 });
 
 module.exports = router;

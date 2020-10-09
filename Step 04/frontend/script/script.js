@@ -23,7 +23,7 @@ $(function() {
                 '  </div>\n' +
                 ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
                 '<p>' + response.data[i].date + '</p></div>\n' +
-                '<a href="./createPost"><button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button></a><a href="./index.html"><button class="btn delete admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
+                '<button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn delete admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
                 '</li>');
         }
 
@@ -55,7 +55,41 @@ $(function() {
            axios.post('http://localhost:3000/update', {
               numAdvertisements: numAd
            }).then(response => {
-               console.log(response);
+           console.log(response);
+                $('.container')[0].innerHTML =
+                '<div class="card">' +
+                    '<div class="card-content">' +
+                        '<form method="post" class="container">' +
+                            '<div>' +
+                                '<label for="ad_title">Title</label>' +
+                                '<input id="ad_title" type="text" value="' + response.data[0].titre + '" required>' +
+                            '</div>' +
+
+                             '<div>' +
+                                '<label for="ad_object">Object</label>' +
+                                '<input id="ad_object" type="text" value="' + response.data[0].objet + '" required>' +
+                             '</div>' +
+
+                             '<div>' +
+                                '<label>Contenu</label>' +
+                                '<textarea id="ad_contenu" required>' + response.data[0].contenu + '</textarea>' +
+                             '</div>' +
+
+                             '<div class="center">' +
+                                '<button id="submit" class="btn" type="submit">Update</button>' +
+                             '</div>' +
+                        '</form>' +
+                    '</div>' +
+                '</div>';
+
+                $('form').on('submit', function() {
+                    axios.post('http://localhost:3000/update', {
+                        numAdvertisements: response.data[0].numAdvertisements,
+                        titre: $('#ad_title').val(),
+                        objet: $('#ad_object').val(),
+                        contenu: $('#ad_contenu').val()
+                    });
+                });
            }).catch(err => {
                throw err;
            });
