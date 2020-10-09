@@ -23,7 +23,7 @@ $(function() {
                 '  </div>\n' +
                 ' <div class="collapsible-body"><span>' + response.data[i].contenu + '</span>' +
                 '<p>' + response.data[i].date + '</p></div>\n' +
-                '<button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
+                '<button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button><a href="./index.html"><button class="btn delete admin_btns" value='+ response.data[i].numAdvertisements +'>Delete</button></a>' +
                 '</li>');
         }
 
@@ -40,13 +40,25 @@ $(function() {
             }
         }
 
-        $('.admin_btns').on('click', (e) => {
+        $('.delete').on('click', (e) => {
             console.log((e.target).value);
             let numAdvertisements = (e.target).value;
 
             axios.post('http://localhost:3000/delete', { numAdvertisements: numAdvertisements })
             .then(response => { 
             });
+        });
+
+        $('.update').on('click', (e) => {
+           let numAd = e.target.value;
+
+           axios.post('http://localhost:3000/update', {
+              numAdvertisements: numAd
+           }).then(response => {
+               console.log(response);
+           }).catch(err => {
+               throw err;
+           });
         });
     }).catch(err => {
         console.log(err);
