@@ -4,10 +4,21 @@ $(function() {
 
     $('#disconnect').hide();
     $('#create_ad').hide();
+    
+        // CHECK IF USER CONNECTED OR NOT
+        if (ck.checkForCookie('numPeople') && ck.checkForCookie('isRecruteur')) {
+            document.cookie = 'isConnected=1';
+        }
+        else {
+            document.cookie = 'isConnected=0';
+        }
+
 
     $('#disconnect').on('click', () => {
         document.cookie = 'isRecruteur=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
         document.cookie = 'numPeople=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+
+        document.cookie = 'isConnected=0';  //NEW
     });
 
     axios.get('http://localhost:3000/select').then(response => {    //selectionne et affiche les ad
@@ -27,25 +38,22 @@ $(function() {
                 '<button class="btn update admin_btns" value='+ response.data[i].numAdvertisements +'>Update</button>' + 
                 '<a href="./index.html"><button class="btn delete admin_btns" value='+ 
                 response.data[i].numAdvertisements +'>Delete</button></a>' +
-                '<a class="modal-trigger" href="#modal1"><button class="btn" value='+ response.data[i].numAdvertisements +'>Apply</button><a>' +
+                '<a class="modal-trigger" href="#modal1"><button class="btn apply" value='+ response.data[i].numAdvertisements +'>Apply</button><a>' +
                 '</li>');
         }
 
         $('.admin_btns').hide();
-
-        if (document.cookie != "") {
-
+        if (parseInt(ck.getCookie('isConnected'))) {
             $('#connect').hide();
             $('#disconnect').show();
-            $('.admin_btns').show();
 
             if (parseInt(ck.getCookie('isRecruteur'))) {
+                $('.admin_btns').show();
                 $('#create_ad').show();
             }
         }
 
         $('.delete').on('click', (e) => {
-            console.log((e.target).value);
             let numAdvertisements = (e.target).value;
 
             axios.post('http://localhost:3000/delete', { numAdvertisements: numAdvertisements })
@@ -59,7 +67,7 @@ $(function() {
             axios.post('http://localhost:3000/update', {
                 numAdvertisements: numAd
             }).then(response => {
-            console.log(response);
+
                 $('.container')[0].innerHTML =
                 '<div class="card">' +
                     '<div class="card-content">' +
@@ -98,6 +106,8 @@ $(function() {
                 throw err;
             });
         });
+
+
     }).catch(err => {
         console.log(err);
     });

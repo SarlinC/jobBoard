@@ -28,6 +28,8 @@ $(function() {
                 document.cookie = `isRecruteur=${response.data[1][0].isRecruteur}`;
                 document.cookie = `numPeople=${response.data[1][0].numPeople}`;
 
+                document.cookie = 'isConnected=1';      // NEW
+
             }
         }).catch( err => {
             console.log(err);
