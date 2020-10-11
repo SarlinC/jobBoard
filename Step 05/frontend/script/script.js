@@ -106,7 +106,42 @@ $(function() {
                 throw err;
             });
         });
+        // console.log(ck.getCookie('numPeople'));
+        $('.apply').on('click', (e) => {
+            let numAd = e.target.value;
+            let numPeople;
+            // console.log(numAd);
 
+            if(parseInt(ck.getCookie('isConnected'))) {
+                numPeople = parseInt(ck.getCookie('numPeople'));
+                $('#first_name').removeAttr('required');
+                $('#last_name').removeAttr('required');
+                $('#email').removeAttr('required');
+                $('.notConnectedFields').hide();
+
+                $('#apply_form').on('submit', () => {
+                    axios.post('http://localhost:3000/apply', {
+                        numPeople: numPeople,
+                        numAdvertisements: numAd,
+                        mail: $('#mail').val()
+                    })
+                });
+            }
+            else {
+                numPeople = null;
+
+                $('#apply_form').on('submit', () => {
+                    axios.post('http://localhost:3000/apply', {
+                        numPeople: numPeople,
+                        numAdvertisements: numAd,
+                        mail: $('#mail').val(),
+                        first_name: $('#first_name').val(),
+                        last_name: $('#last_name').val(),
+                        email: $('#email').val()
+                    })
+                });
+            }
+        });
 
     }).catch(err => {
         console.log(err);

@@ -14,7 +14,7 @@ $(function() {
         else {
             is_recruteur = 1;
             $('#companies').show();
-            $('#companieName_id').attr('required', 'true');
+            $('#companieName_id').attr('required', 'true'); // WHY TRUE?
         }
     });
 
