@@ -12,6 +12,8 @@ var createPostRouter = require('./routes/createPost');
 var updateRouter = require('./routes/update');
 var applyRouter = require('./routes/apply');
 var selectAdRecruteurRouteur = require('./routes/selectAdRecruteur');
+var adminSelectRouter = require('./routes/adminSelect');
+var adminDeleteRouter = require('./routes/adminDelete');
 
 var app = express();
 
@@ -41,6 +43,8 @@ app.use('/createPost', createPostRouter);
 app.use('/update', updateRouter);
 app.use('/apply', applyRouter);
 app.use('/selectAdRecruteur', selectAdRecruteurRouteur);
+app.use('/adminSelect', adminSelectRouter);
+app.use('/adminDelete', adminDeleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
