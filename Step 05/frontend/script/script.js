@@ -6,7 +6,7 @@ $(function() {
     $('#create_ad').hide();
     
         // CHECK IF USER CONNECTED OR NOT
-        if (ck.checkForCookie('numPeople') && ck.checkForCookie('isRecruteur')) {
+        if (ck.checkForCookie('numPeople') && (ck.checkForCookie('isRecruteur') === 1 || ck.checkForCookie('isRecruteur') === 2)) {
             document.cookie = 'isConnected=1';
         }
         else {
@@ -47,7 +47,11 @@ $(function() {
             $('#connect').hide();
             $('#disconnect').show();
 
-            if (parseInt(ck.getCookie('isRecruteur'))) {
+            if (parseInt(ck.getCookie('isRecruteur')) === 1) {
+                $('.admin_btns').show();
+                $('#create_ad').show();
+            }
+            else if (parseInt(ck.getCookie('isRecruteur')) === 2) {
                 $('.admin_btns').show();
                 $('#create_ad').show();
             }
