@@ -3,16 +3,16 @@ $(function() {
 
     $('#companies').hide();
 
-    let is_recruteur = 0;
+    let isAdmin = 0;
 
     $('[name="is_recruiter"]').on('change', function() {
         if($('[name="is_recruiter"]')[0].checked) {
-            is_recruteur = 0;
+            isAdmin = 0;
             $('#companies').hide();
             $('#companieName_id').removeAttr('required');
         }
         else {
-            is_recruteur = 1;
+            isAdmin = 1;
             $('#companies').show();
             $('#companieName_id').attr('required', 'true'); // WHY TRUE?
         }
@@ -29,7 +29,7 @@ $(function() {
 
         let companieName;
 
-        if (is_recruteur == 1) {
+        if (isAdmin == 1) {
             companieName = $('#companieName_id').val();
         }
 
@@ -38,7 +38,7 @@ $(function() {
             lastName: lastName,
             email_string: email_string,
             pwd_string: pwd_string,
-            is_recruteur: is_recruteur,
+            isAdmin: isAdmin,
             companieName: companieName
         }).then( response => {
             console.log(response.data);

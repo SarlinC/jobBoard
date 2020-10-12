@@ -15,7 +15,6 @@ $(function() {
             email: email,
             password: password
         }).then( response => {
-            console.log(response.data);
             if(response.data[0] === false) {
                 $('#login_container').hide();
                 $('#login_fail').show();
@@ -25,7 +24,7 @@ $(function() {
                 // $('#login_success').show();
                 window.location.href = "./index.html";
 
-                document.cookie = `isRecruteur=${response.data[1][0].isRecruteur}`;
+                document.cookie = `isAdmin=${response.data[1][0].isAdmin}`;
                 document.cookie = `numPeople=${response.data[1][0].numPeople}`;
 
                 document.cookie = 'isConnected=1';      // NEW
