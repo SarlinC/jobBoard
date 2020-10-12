@@ -6,7 +6,7 @@ $(function() {
     $('#create_ad').hide();
     
         // CHECK IF USER CONNECTED OR NOT
-        if (ck.checkForCookie('numPeople') && ck.checkForCookie('isAdmmin')) {
+        if (ck.checkForCookie('numPeople') && ck.checkForCookie('isAdmin')) {
             document.cookie = 'isConnected=1';
         }
         else {
