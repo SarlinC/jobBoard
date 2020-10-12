@@ -24,7 +24,7 @@ $(function() {
                 // $('#login_success').show();
                 window.location.href = "./index.html";
 
-                document.cookie = `isAdmin=${response.data[1][0].isAdmin}`;
+                document.cookie = `isRecruteur=${response.data[1][0].isRecruteur}`;
                 document.cookie = `numPeople=${response.data[1][0].numPeople}`;
 
                 document.cookie = 'isConnected=1';      // NEW
