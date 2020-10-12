@@ -6,7 +6,7 @@ $(function() {
     $('#create_ad').hide();
     
         // CHECK IF USER CONNECTED OR NOT
-        if (ck.checkForCookie('numPeople') && (ck.checkForCookie('isRecruteur') === 1 || ck.checkForCookie('isRecruteur') === 2)) {
+        if (ck.checkForCookie('numPeople')) {
             document.cookie = 'isConnected=1';
         }
         else {
@@ -48,7 +48,20 @@ $(function() {
             $('#disconnect').show();
 
             if (parseInt(ck.getCookie('isRecruteur')) === 1) {
-                $('.admin_btns').show();
+                axios.post('http://localhost:3000/selectAdRecruteur', {
+                    numPeople: ck.getCookie('numPeople')
+                }).then(resp => {
+                    for (let i = 0; i < $('.admin_btns').length; i ++) {
+                        for (let j = 0; j < resp.data.length; j ++) {
+                            if ($('.admin_btns')[i].value == resp.data[j].numAdvertisements) {
+                                $('.admin_btns')[i].style.display = "inline-block";
+                            }
+                        }
+                    }
+                }).catch(err => {
+                    throw err;
+                });
+
                 $('#create_ad').show();
             }
             else if (parseInt(ck.getCookie('isRecruteur')) === 2) {
