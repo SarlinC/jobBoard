@@ -4,6 +4,7 @@ $(function() {
 
     $('#disconnect').hide();
     $('#create_ad').hide();
+    $('#admin_page').hide();
     
         // CHECK IF USER CONNECTED OR NOT
         if (ck.checkForCookie('numPeople')) {
@@ -67,6 +68,7 @@ $(function() {
             else if (parseInt(ck.getCookie('isRecruteur')) === 2) {
                 $('.admin_btns').show();
                 $('#create_ad').show();
+                $('#admin_page').show();
             }
         }
 
