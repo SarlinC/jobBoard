@@ -96,6 +96,7 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            $('.next').blur();
         });
 
         $('.previous').on('click', () => {
@@ -106,6 +107,7 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            $('.previous').blur();
         });
 
         $('.first').on('click', () => {
@@ -116,6 +118,7 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            $('.first').blur();
         });
 
         $('.last').on('click', () => {
@@ -126,9 +129,10 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            $('.last').blur();
         });
         // PAGINATION END
-        
+
 
         $('.delete').on('click', (e) => {
             let numAdvertisements = (e.target).value;

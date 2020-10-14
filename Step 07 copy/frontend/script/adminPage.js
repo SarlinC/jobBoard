@@ -33,6 +33,7 @@ $(function() {
         for (let i = page ; i < (page + 7) ; i++) {
             $('#tableBody').append(respArray[i]);
         }
+        $('#tableBody').blur();
     });
 
     $('.previous').on('click', () => {
@@ -42,6 +43,7 @@ $(function() {
         for (let i = page ; i < (page + 7) ; i++) {
             $('#tableBody').append(respArray[i]);
         }
+        $('.previous').blur();
     });
 
     $('.first').on('click', () => {
@@ -51,6 +53,7 @@ $(function() {
         for (let i = page ; i < (page + 7) ; i++) {
             $('#tableBody').append(respArray[i]);
         }
+        $('.first').blur();
     });
 
     $('.last').on('click', () => {
@@ -60,6 +63,7 @@ $(function() {
         for (let i = page ; i < (page + 7) ; i++) {
             $('#tableBody').append(respArray[i]);
         }
+        $('.last').blur();
     });
 
 
