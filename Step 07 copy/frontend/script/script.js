@@ -47,12 +47,46 @@ $(function() {
                 '</li>'
             );
         }
+        // SHOW OR HIDE ADMIN BTNS
+        let displayAdminBtns = () => {  
+            $('.admin_btns').hide();
+            if (parseInt(ck.getCookie('isConnected'))) {
+                $('#connect').hide();
+                $('#disconnect').show();
+    
+                if (parseInt(ck.getCookie('isRecruteur')) === 1) {
+                    axios.post('http://localhost:3000/selectAdRecruteur', {
+                        numPeople: ck.getCookie('numPeople')
+                    }).then(resp => {
+                        for (let i = 0; i < $('.admin_btns').length; i ++) {
+                            for (let j = 0; j < resp.data.length; j ++) {
+                                if ($('.admin_btns')[i].value == resp.data[j].numAdvertisements) {
+                                    $('.admin_btns')[i].style.display = "inline-block";
+                                }
+                            }
+                        }
+                    }).catch(err => {
+                        throw err;
+                    });
+    
+                    $('#create_ad').show();
+                }
+                else if (parseInt(ck.getCookie('isRecruteur')) === 2) {
+                    $('.admin_btns').show();
+                    $('#create_ad').show();
+                    $('#admin_page').show();
+                }
+            }
+        };
 
+        // PAGINATION START
         let pageMaxMultiplier = Math.ceil(respArray.length / 4);
 
         for (let i = 0 ; i < (page + 4) ; i++) {
             $('.popout').append(respArray[i]);
         }
+
+        displayAdminBtns();
 
         $('.next').on('click', () => {
             page === ((pageMaxMultiplier * 4) - 4) ? (page = 0) : (page += 4);
@@ -61,6 +95,7 @@ $(function() {
             for (let i = page ; i < (page + 4) ; i++) {
                 $('.popout').append(respArray[i]);
             }
+            displayAdminBtns();
         });
 
         $('.previous').on('click', () => {
@@ -70,6 +105,7 @@ $(function() {
             for (let i = page ; i < (page + 4) ; i++) {
                 $('.popout').append(respArray[i]);
             }
+            displayAdminBtns();
         });
 
         $('.first').on('click', () => {
@@ -79,6 +115,7 @@ $(function() {
             for (let i = page ; i < (page + 4) ; i++) {
                 $('.popout').append(respArray[i]);
             }
+            displayAdminBtns();
         });
 
         $('.last').on('click', () => {
@@ -88,36 +125,10 @@ $(function() {
             for (let i = page ; i < (page + 4) ; i++) {
                 $('.popout').append(respArray[i]);
             }
+            displayAdminBtns();
         });
-
-        $('.admin_btns').hide();
-        if (parseInt(ck.getCookie('isConnected'))) {
-            $('#connect').hide();
-            $('#disconnect').show();
-
-            if (parseInt(ck.getCookie('isRecruteur')) === 1) {
-                axios.post('http://localhost:3000/selectAdRecruteur', {
-                    numPeople: ck.getCookie('numPeople')
-                }).then(resp => {
-                    for (let i = 0; i < $('.admin_btns').length; i ++) {
-                        for (let j = 0; j < resp.data.length; j ++) {
-                            if ($('.admin_btns')[i].value == resp.data[j].numAdvertisements) {
-                                $('.admin_btns')[i].style.display = "inline-block";
-                            }
-                        }
-                    }
-                }).catch(err => {
-                    throw err;
-                });
-
-                $('#create_ad').show();
-            }
-            else if (parseInt(ck.getCookie('isRecruteur')) === 2) {
-                $('.admin_btns').show();
-                $('#create_ad').show();
-                $('#admin_page').show();
-            }
-        }
+        // PAGINATION END
+        
 
         $('.delete').on('click', (e) => {
             let numAdvertisements = (e.target).value;
