@@ -3,7 +3,7 @@
 
     let connection = mysql.createConnection({
         host: 'localhost',
-        port: '8889',
+        //port: '8889',
         user: 'root',
         password: 'root',
         database: 'jobboard'
