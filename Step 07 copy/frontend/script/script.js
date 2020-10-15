@@ -79,13 +79,107 @@ $(function() {
             }
         };
 
+        
+        let listeners = () => {
+            $('.delete').on('click', (e) => {
+                let numAdvertisements = (e.target).value;
+
+                axios.post('http://localhost:3000/delete', { numAdvertisements: numAdvertisements })
+                .then(response => { 
+                });
+            });
+
+            $('.update').on('click', (e) => {
+                let numAd = e.target.value;
+
+                axios.post('http://localhost:3000/update', {
+                    numAdvertisements: numAd
+                }).then(response => {
+
+                    $('.container')[0].innerHTML =
+                    '<div class="card">' +
+                        '<div class="card-content">' +
+                            '<form method="post" class="container">' +
+                                '<div>' +
+                                    '<label for="ad_title">Title</label>' +
+                                    '<input id="ad_title" type="text" value="' + response.data[0].titre + '" required>' +
+                                '</div>' +
+
+                                '<div>' +
+                                    '<label for="ad_object">Object</label>' +
+                                    '<input id="ad_object" type="text" value="' + response.data[0].objet + '" required>' +
+                                '</div>' +
+
+                                '<div>' +
+                                    '<label>Contenu</label>' +
+                                    '<textarea id="ad_contenu" required>' + response.data[0].contenu + '</textarea>' +
+                                '</div>' +
+
+                                '<div class="center">' +
+                                    '<button id="submit" class="btn" type="submit">Update</button>' +
+                                '</div>' +
+                            '</form>' +
+                        '</div>' +
+                    '</div>';
+
+                    $('form').on('submit', function() {
+                        axios.post('http://localhost:3000/update', {
+                            numAdvertisements: response.data[0].numAdvertisements,
+                            titre: $('#ad_title').val(),
+                            objet: $('#ad_object').val(),
+                            contenu: $('#ad_contenu').val()
+                        });
+                    });
+                }).catch(err => {
+                    throw err;
+                });
+            });
+            // console.log(ck.getCookie('numPeople'));
+            $('.apply').on('click', (e) => {
+                let numAd = e.target.value;
+                let numPeople;
+                // console.log(numAd);
+
+                if(parseInt(ck.getCookie('isConnected'))) {
+                    numPeople = parseInt(ck.getCookie('numPeople'));
+                    $('#first_name').removeAttr('required');
+                    $('#last_name').removeAttr('required');
+                    $('#email').removeAttr('required');
+                    $('.notConnectedFields').hide();
+
+                    $('#apply_form').on('submit', () => {
+                        axios.post('http://localhost:3000/apply', {
+                            numPeople: numPeople,
+                            numAdvertisements: numAd,
+                            mail: $('#mail').val()
+                        })
+                    });
+                }
+                else {
+                    numPeople = null;
+
+                    $('#apply_form').on('submit', () => {
+                        axios.post('http://localhost:3000/apply', {
+                            numPeople: numPeople,
+                            numAdvertisements: numAd,
+                            mail: $('#mail').val(),
+                            first_name: $('#first_name').val(),
+                            last_name: $('#last_name').val(),
+                            email: $('#email').val()
+                        })
+                    });
+                }
+            });
+        };
+
+
         // PAGINATION START
         let pageMaxMultiplier = Math.ceil(respArray.length / 4);
 
         for (let i = 0 ; i < (page + 4) ; i++) {
             $('.popout').append(respArray[i]);
         }
-
+        listeners();
         displayAdminBtns();
 
         $('.next').on('click', () => {
@@ -96,6 +190,7 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            listeners();
             $('.next').blur();
         });
 
@@ -107,6 +202,7 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            listeners();
             $('.previous').blur();
         });
 
@@ -118,6 +214,7 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            listeners();
             $('.first').blur();
         });
 
@@ -129,100 +226,101 @@ $(function() {
                 $('.popout').append(respArray[i]);
             }
             displayAdminBtns();
+            listeners();
             $('.last').blur();
         });
         // PAGINATION END
 
 
-        $('.delete').on('click', (e) => {
-            let numAdvertisements = (e.target).value;
+        // $('.delete').on('click', (e) => {
+        //     let numAdvertisements = (e.target).value;
 
-            axios.post('http://localhost:3000/delete', { numAdvertisements: numAdvertisements })
-            .then(response => { 
-            });
-        });
+        //     axios.post('http://localhost:3000/delete', { numAdvertisements: numAdvertisements })
+        //     .then(response => { 
+        //     });
+        // });
 
-        $('.update').on('click', (e) => {
-            let numAd = e.target.value;
+        // $('.update').on('click', (e) => {
+        //     let numAd = e.target.value;
 
-            axios.post('http://localhost:3000/update', {
-                numAdvertisements: numAd
-            }).then(response => {
+        //     axios.post('http://localhost:3000/update', {
+        //         numAdvertisements: numAd
+        //     }).then(response => {
 
-                $('.container')[0].innerHTML =
-                '<div class="card">' +
-                    '<div class="card-content">' +
-                        '<form method="post" class="container">' +
-                            '<div>' +
-                                '<label for="ad_title">Title</label>' +
-                                '<input id="ad_title" type="text" value="' + response.data[0].titre + '" required>' +
-                            '</div>' +
+        //         $('.container')[0].innerHTML =
+        //         '<div class="card">' +
+        //             '<div class="card-content">' +
+        //                 '<form method="post" class="container">' +
+        //                     '<div>' +
+        //                         '<label for="ad_title">Title</label>' +
+        //                         '<input id="ad_title" type="text" value="' + response.data[0].titre + '" required>' +
+        //                     '</div>' +
 
-                            '<div>' +
-                                '<label for="ad_object">Object</label>' +
-                                '<input id="ad_object" type="text" value="' + response.data[0].objet + '" required>' +
-                            '</div>' +
+        //                     '<div>' +
+        //                         '<label for="ad_object">Object</label>' +
+        //                         '<input id="ad_object" type="text" value="' + response.data[0].objet + '" required>' +
+        //                     '</div>' +
 
-                            '<div>' +
-                                '<label>Contenu</label>' +
-                                '<textarea id="ad_contenu" required>' + response.data[0].contenu + '</textarea>' +
-                            '</div>' +
+        //                     '<div>' +
+        //                         '<label>Contenu</label>' +
+        //                         '<textarea id="ad_contenu" required>' + response.data[0].contenu + '</textarea>' +
+        //                     '</div>' +
 
-                            '<div class="center">' +
-                                '<button id="submit" class="btn" type="submit">Update</button>' +
-                            '</div>' +
-                        '</form>' +
-                    '</div>' +
-                '</div>';
+        //                     '<div class="center">' +
+        //                         '<button id="submit" class="btn" type="submit">Update</button>' +
+        //                     '</div>' +
+        //                 '</form>' +
+        //             '</div>' +
+        //         '</div>';
 
-                $('form').on('submit', function() {
-                    axios.post('http://localhost:3000/update', {
-                        numAdvertisements: response.data[0].numAdvertisements,
-                        titre: $('#ad_title').val(),
-                        objet: $('#ad_object').val(),
-                        contenu: $('#ad_contenu').val()
-                    });
-                });
-            }).catch(err => {
-                throw err;
-            });
-        });
-        // console.log(ck.getCookie('numPeople'));
-        $('.apply').on('click', (e) => {
-            let numAd = e.target.value;
-            let numPeople;
-            // console.log(numAd);
+        //         $('form').on('submit', function() {
+        //             axios.post('http://localhost:3000/update', {
+        //                 numAdvertisements: response.data[0].numAdvertisements,
+        //                 titre: $('#ad_title').val(),
+        //                 objet: $('#ad_object').val(),
+        //                 contenu: $('#ad_contenu').val()
+        //             });
+        //         });
+        //     }).catch(err => {
+        //         throw err;
+        //     });
+        // });
+        // // console.log(ck.getCookie('numPeople'));
+        // $('.apply').on('click', (e) => {
+        //     let numAd = e.target.value;
+        //     let numPeople;
+        //     // console.log(numAd);
 
-            if(parseInt(ck.getCookie('isConnected'))) {
-                numPeople = parseInt(ck.getCookie('numPeople'));
-                $('#first_name').removeAttr('required');
-                $('#last_name').removeAttr('required');
-                $('#email').removeAttr('required');
-                $('.notConnectedFields').hide();
+        //     if(parseInt(ck.getCookie('isConnected'))) {
+        //         numPeople = parseInt(ck.getCookie('numPeople'));
+        //         $('#first_name').removeAttr('required');
+        //         $('#last_name').removeAttr('required');
+        //         $('#email').removeAttr('required');
+        //         $('.notConnectedFields').hide();
 
-                $('#apply_form').on('submit', () => {
-                    axios.post('http://localhost:3000/apply', {
-                        numPeople: numPeople,
-                        numAdvertisements: numAd,
-                        mail: $('#mail').val()
-                    })
-                });
-            }
-            else {
-                numPeople = null;
+        //         $('#apply_form').on('submit', () => {
+        //             axios.post('http://localhost:3000/apply', {
+        //                 numPeople: numPeople,
+        //                 numAdvertisements: numAd,
+        //                 mail: $('#mail').val()
+        //             })
+        //         });
+        //     }
+        //     else {
+        //         numPeople = null;
 
-                $('#apply_form').on('submit', () => {
-                    axios.post('http://localhost:3000/apply', {
-                        numPeople: numPeople,
-                        numAdvertisements: numAd,
-                        mail: $('#mail').val(),
-                        first_name: $('#first_name').val(),
-                        last_name: $('#last_name').val(),
-                        email: $('#email').val()
-                    })
-                });
-            }
-        });
+        //         $('#apply_form').on('submit', () => {
+        //             axios.post('http://localhost:3000/apply', {
+        //                 numPeople: numPeople,
+        //                 numAdvertisements: numAd,
+        //                 mail: $('#mail').val(),
+        //                 first_name: $('#first_name').val(),
+        //                 last_name: $('#last_name').val(),
+        //                 email: $('#email').val()
+        //             })
+        //         });
+        //     }
+        // });
 
     }).catch(err => {
         console.log(err);
