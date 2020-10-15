@@ -16,7 +16,7 @@ $(function() {
 
 
     $('#disconnect').on('click', () => {
-        document.cookie = 'isRecruteur=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'typeUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
         document.cookie = 'numPeople=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
 
         document.cookie = 'isConnected=0';  //NEW
@@ -54,7 +54,7 @@ $(function() {
                 $('#connect').hide();
                 $('#disconnect').show();
     
-                if (parseInt(ck.getCookie('isRecruteur')) === 1) {
+                if (parseInt(ck.getCookie('typeUser')) === 1) {
                     axios.post('http://localhost:3000/selectAdRecruteur', {
                         numPeople: ck.getCookie('numPeople')
                     }).then(resp => {
@@ -71,7 +71,7 @@ $(function() {
     
                     $('#create_ad').show();
                 }
-                else if (parseInt(ck.getCookie('isRecruteur')) === 2) {
+                else if (parseInt(ck.getCookie('typeUser')) === 2) {
                     $('.admin_btns').show();
                     $('#create_ad').show();
                     $('#admin_page').show();

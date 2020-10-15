@@ -13,7 +13,7 @@ $(function() {
             '<td>' + response.data[i].prenomPeople + '</td>' +
             '<td>' + response.data[i].nomPeople + '</td>' +
             '<td>' + response.data[i].emailPeople + '</td>' +
-            '<td>' + response.data[i].isRecruteur +'</td>' +
+            '<td>' + response.data[i].typeUser +'</td>' +
             '<td><a href="./adminPage.html"><button class="btn delete" value=' + response.data[i].numPeople + '>delete</button></a></td>' +
             '<td><button class="btn update" value=' + response.data[i].numPeople + '>update</button></td>' +
         '</tr>'
