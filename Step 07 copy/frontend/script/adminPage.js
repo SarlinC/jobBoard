@@ -28,6 +28,8 @@ $(function() {
     
         $('.update').on('click', (e) => {
             let numPeople = e.target.value;
+            $('.pagination').hide();
+            
             axios.post('http://localhost:3000/adminUpdate', { numPeople: numPeople }).then((response => {
     
                 $('.container')[0].innerHTML = 

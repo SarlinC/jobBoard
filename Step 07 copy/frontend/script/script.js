@@ -91,6 +91,7 @@ $(function() {
 
             $('.update').on('click', (e) => {
                 let numAd = e.target.value;
+                $('.pagination').hide();
 
                 axios.post('http://localhost:3000/update', {
                     numAdvertisements: numAd
